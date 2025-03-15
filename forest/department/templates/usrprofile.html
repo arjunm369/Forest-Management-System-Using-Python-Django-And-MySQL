@@ -1,0 +1,200 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+  .body{
+    margin-left: 357px;
+  }
+  .student-profile .card {
+    border-radius: 10px;
+}
+.student-profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+.student-profile .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+.student-profile .card p {
+    font-size: 16px;
+    color: #000;
+}
+.student-profile .table th,
+.student-profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+}
+#shadow{
+  margin-top: -200px;
+    margin-left: -10px;
+    width: 520px;
+    height: 335px;
+}
+#card{
+  margin-left: 180px;
+  margin-top: 75px;
+}
+#table{
+  width:100px;
+}
+#show{
+  margin-top: 250px;;
+}
+tbody{
+  margin-left: -10px;
+}
+.name{
+  margin-left: 45px;
+  margin-top: 56px;
+}
+.sem{
+  margin-left: 178px;
+  margin-top: -29px;
+}
+.abhi{
+  margin-left: 232px;
+  margin-top: -23px;
+}
+.whole{
+  margin-left: -9px;
+  margin-top: -8px;
+}
+b{
+  font-size: 20px;
+}
+.whol{
+  margin-left: -12px;
+  margin-top: -22px
+}
+.semi{
+  margin-left: 175px;
+  margin-top: -24px;
+}
+.button{
+  margin-left: 200px;
+    margin-top:20px;
+}
+#but{
+  background-color: #f5b968;
+}
+#tog{
+  margin-left: 581px;
+    margin-top: -340px;
+}
+#s{
+  width: 170px;
+    height: 35px;
+}
+#addr{
+  margin-top: -40px;
+}
+#phone{
+  margin-top: 5px;
+}
+#qual{
+  margin-top: -50px;
+}
+#bun{
+  margin-top: -100px;
+    margin-left: 44px;
+}
+form{
+  margin-top: 345px;
+    margin-left: -695px;
+}
+.inp{
+  margin-top: 1px;
+}
+#id{
+  margin-top: 2px;
+}
+.rof{
+  font-size: 30px;
+}
+</style>
+{% for d in datapf %}
+<div class="body">
+<div class="student-profile py-4">
+  <div class="container">
+    <div>
+
+      <div>
+        <div id="tog">
+          <div>
+            <div>
+              <form class="form-horizontal" method="post" name="myForm" onsubmit=""
+                action="{% url 'editprofile' %}">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" value="{{d.userid}}" name="uid">
+                <div id="hd">
+                  <h4 class="rof">Edit profile</h4>
+                </div>
+                <div class="box-content">
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="name" value="{{d.name}}" id="s" class="col-xs-10 col-sm-5" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <br><br>
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group" id="addr">
+                      <label class="col-sm-2 control-label no-padding-right"
+                        for="form-field-1">Address</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="address" value="{{d.address}}" id="s"
+                          class="col-xs-10 col-sm-5 inp" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group" id="phone">
+                      <label class="col-sm-2 control-label no-padding-right"
+                        for="form-field-1">Mail-id</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="email" value="{{d.email}}" id="s" class="col-xs-10 col-sm-5 inp" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <br><br><br>
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group" id="qual">
+                      <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Mobile No</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="mobileno" value="{{d.mobileno}}" id="s"
+                          class="col-xs-10 col-sm-5 inp" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <br><br><br>
+                  <button name="edit" type="submit" class="btn btn-success" id="bun"><span class="glyphicon 
+          glyphicon-ok-sign"></span>Submit</button>
+                </div>
+            </div>
+          </div>
+
+          </form>
+          <div class="modal-footer ">
+
+          </div>
+        </div>
+   
+    </div>
+  </div>
+</div>
+</div>
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "departmenthome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #pass{
+        margin-left: -215px;
+        margin-top: 0px;
+    }
+    .head{
+        background-color: rgb(171 178 180);
+        width: 640px;
+        padding: 9px;
+        margin-left: 99px;
+    }
+    .title{
+        margin-left: -365px;
+margin-top: -4px;
+    }
+    .content{
+        background-color: #e5eff4;
+        width: 641px;
+        /* padding: 150px; */
+        margin-left: 99px;
+        margin-top: 3px;
+        height: 390px;
+    }
+    #form{
+        margin-left: 145px;
+    }
+   .input{
+       margin-top: -104px;
+       margin-left: 90px;
+   }
+   #old{
+       margin-left: -375px;
+       font-size: 22px;
+       width: auto;
+       margin-top: 95px;
+       padding-top: 45px;
+   }
+   .old{
+    margin-left: 107px;
+    margin-top: -20px;
+   }
+   input{
+       border-radius: 7px;
+       width: 222px;
+       margin-top: -1px;
+   }
+   #new{
+    margin-left: -292px;
+font-size: 22px;
+width: auto;
+margin-top: 38px;
+   }
+   .new{
+       margin-left: 197px;
+       margin-top: -26px;
+   }
+   .button{
+       margin-top: 45px;
+   }
+   #button{
+       background-color: #eeb7ae;
+       margin-left: -220px;
+   }
+   #close{
+    background-color:  #fa0404;
+    width: 60px;
+    color: beige;
+   }
+   .close{
+    margin-left: 385px;
+margin-top: -134px;
+font-size: 18px;
+    margin-right: 130px;
+   }
+   .enter{
+       font-size: 22px;
+       width : fit-content;
+       margin-left: -291px;
+       margin-top: 28px;
+    }
+    #enter{
+        margin-left: 196px;
+        margin-top: -27px;
+    }
+    .prd{
+        margin-bottom: -54px;
+    }
+    #ol{
+        margin-top: 1px;
+    }
+</style>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4" align="center"><b></b></h1>
+                    </div><br>
+                    <div class="form" align="center">
+                    <form method="post" action="{% url 'privacy' %}" onsubmit="return privacy(this)" id="form">
+                        {% csrf_token %}
+                        <div class="head">
+                            <div id="pass">
+                            <h2>Change your password</h2>
+                            </div>
+                            <div class="title">
+                                <h6>Create a new secure password</h6>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="input">
+                              <div id="old">Old password &emsp;:</div>
+                              <div class="old"><input type="text" name="oldpsw"></div>
+                            </div>
+                            <div id="new">New-password&emsp;:</div>
+                            <div class="new"><input type="password" name="newpsw"></div>
+                            <div class="enter"> Re-enter<br>new-password&emsp;:</div>
+                            <div id="enter"><input type="password" name="repsw"></div>
+                            <div class="button">
+                                <button type="submit" id="button">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" action="{% url 'departmenthome' %}">
+                        {% csrf_token %}
+                    <div class="close">
+                        <button id="close">Close</button>
+                    </div></form>
+                      </div>
+                    </main>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}

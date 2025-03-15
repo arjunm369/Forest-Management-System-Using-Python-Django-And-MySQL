@@ -1,0 +1,129 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #bu{
+        width: 20px;
+        height: 10px;
+        background-color: red;
+    }
+    #buto{
+        width: 20px;
+        height: 10px;
+    }
+    .bad{
+        margin-left: 315px;
+    }
+    #in{
+        width: 185px;
+    height: 30px;
+    }
+    #top{
+        margin-top: -30px;
+    }
+</style>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Product type list</h4>
+                        <div class="table-responsive pt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Si.no</th>
+                                        <th>Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for d in data %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{d.category}}</td>
+                                        <td>
+                                            <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{d.categoryid}}">Delete</a>
+                                            <a type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-{{d.categoryid}}">Edit</a>
+
+                                            <div class="modal fade" id="delete-{{d.categoryid}}" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h4 class="modal-title custom_align" id="Heading"><b>Delete Category</b></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <br>
+                                                      <h3 class="modal-title custom_align" id="Heading" style="margin-left:200px;color:#e85c68">Are
+                                                        You Want Delete This Category?</h3>
+                                                      <br>
+                                                      <form class="form-horizontal" method="post" name="myForm" onsubmit=""
+                                                        action="{% url 'deletecat' %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" class="form-control" value="{{d.categoryid}}" name="cid">
+                                                        <div class="box-content">
+                            
+                                                          <button name="delete" type="submit" class="btn btn-danger"><span class="glyphicon 
+                              glyphicon-ok-sign"></span>Yes</button>
+                            
+                                                        </div>
+                                                    </div>
+                            
+                                                    </form>
+                                                    <div class="modal-footer ">
+                            
+                                                    </div>
+                                                  </div>
+                                                  <!-- /.modal-content -->
+                                                </div>
+                                              </div>
+                                              </div>
+
+                                              <div class="modal fade" id="edit-{{d.categoryid}}" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+                                                  <div class="modal-content" id="con">
+                                                    <div class="modal-header">
+                                                      <h4 class="modal-title custom_align" id="Heading"><b>Edit Forest</b></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <form class="form-horizontal" method="post" name="myForm" onsubmit=""
+                                                        action="{% url 'editcat' %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" class="form-control" value="{{d.categoryid}}" name="nid">
+                                                        <div class="box-content">
+                                                        <div class="bad">
+                                                          <div class="col-md-10 col-md-offset-2">
+                                                            <div class="form-group" >
+                                                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Category name</label>
+                                                              <div class="col-sm-9">
+                                                                <input type="text" name="category" value="{{d.category}}" id="in" />
+                                                              </div>
+                                                            </div>
+                                                          <button name="edit" type="submit" class="btn btn-success"><span class="glyphicon 
+                                                  glyphicon-ok-sign"></span>Submit</button>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                            
+                                                  </form>
+                                                 
+                                                </div>
+                                                </div>
+                                              </div>
+                                              </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

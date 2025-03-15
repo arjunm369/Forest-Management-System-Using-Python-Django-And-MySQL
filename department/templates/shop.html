@@ -1,0 +1,97 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #heading{
+        margin-top: -28px;
+    }
+</style>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Shop Your Needs</h4>
+                        <div class="table-responsive pt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Si.no</th>
+                                        <th>Category</th>
+                                        <th>Name</th>
+                                        <th>Uses</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Shop</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for d in data %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{d.category.category}}</td>
+                                        <td>{{d.name}}</td>
+                                        <td>{{d.uses}}</td>
+                                        <td>{{d.quantity}}</td>
+                                        <td>{{d.price}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#buy-{{d.productid}}">
+                                                Buy
+                                              </button>
+
+                                             <div class="modal fade" id="buy-{{d.productid}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content" id="con">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel" style="font-size: 25px;"><b>Purchase product</b></h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <br>
+                                                        <h3  id="heading" style="color:#e70619">You are buying <b>{{d.name}}</b></h3>
+                                                        <br>
+                                                        <form class="form-horizontal" method="post" name="myForm" action="">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" class="form-control" value="{{d.productid}}" name="pid">
+                                                        <div class="box-content">
+                            
+                                                            <div >
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&emsp;
+                                                                
+                                                                <form action="payment.html">
+                                                                    <button type="submit" class="btn btn-primary"><a class="nav-link" href="{% url 'payment' %}">Confirm</button></a>
+                                                                    
+                                                                </form>
+                                                                
+
+
+                                                                
+                                                                
+                                                              </div>
+                            
+                                                        </div>
+                                                    </div>
+                            
+                                                    </form>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

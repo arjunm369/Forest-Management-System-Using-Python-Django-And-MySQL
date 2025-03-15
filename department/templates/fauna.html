@@ -1,0 +1,84 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #head{
+        margin-left: 350px;
+    margin-top: 30px;
+    }
+    h2{
+        margin-left: 3px;
+    }
+    .logo{
+        font-size: 18px;
+    margin-left: 4px;
+    }
+    #in{
+        height: 43px;
+    }
+    .but{
+        width: 90px;
+    height: 30px;
+    }
+    .log{
+        font-size: 18px;
+    margin-left: 2px;
+    margin-top: 15px;
+    }
+    #college{
+      height: 50px;
+    }
+</style>
+
+<table>
+<div class="col-lg-5" id="head"> 
+    <div class="section-title">
+      <h2>Add Fauna Details</h2>
+      <p></p>
+    </div>
+
+    <form action="{% url 'faunadetails' %}" onsubmit="return fauna(this)" method="post" role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="form-row">
+        <div class="col-lg-12 col-md-12 form-group">
+            <div class="log">Forest</div>
+            <select name="forest" class="form-control" id="college" onchange="">
+                <option value=" ">--Select--</option>
+                {% for d in data %}
+                <option value="{{d.forestid}}">{{d.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" name="name" class="form-control" id="in" placeholder="Fauna Name" >
+          <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" name="category" class="form-control" id="in" placeholder="Category">
+          <div class="validate"></div>
+        </div>
+     
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" name="habitat" class="form-control" id="in" placeholder="Habitat">
+          <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+            <textarea type="text" class="form-control" name="description" placeholder="Description"></textarea>
+            <div class="validate"></div>
+        </div>
+        <div class="logo">Photo</div>
+          <div class="col-lg-12 col-md-12 form-group">
+            <input type="file" class="form-control" name="photo" id="in" accept="images/*">
+        </div>
+        
+      </div>
+
+
+      <div class="text-center"><input type="submit" value="Save" class="but"  style="background:#8cbde7;" /></div>
+    </form>
+  </div>
+  <div class="col-lg-2">
+</div></table>
+
+
+{% endblock %}

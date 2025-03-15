@@ -1,0 +1,761 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Enjoy-Nature</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'index/css/style.css' %}" media="all">
+	<link href="{% static 'index/css/animate.css' %}" rel="stylesheet" type="text/css" media="all">
+	<title>Div in table</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'index/css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'index/css/style.css' %}" media="all">
+	<link rel="stylesheet" type="text/css" href="{% static 'index/css/font-awesome.min.css' %}" />
+	<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+
+
+
+	<script type="text/javascript" src="{% static 'index/js/jquery-2.1.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'index/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'index/js/ekko-lightbox.js' %}"></script>
+
+	<style>
+		#for {
+			margin-top: 20px;
+		}
+		#con{
+			margin-left: -70px;
+		}
+		#fot{
+			margin-left: 72px;
+			margin-top: 25px;
+		}
+	</style>
+	 {% if  msg != ""  and  msg != null  %}
+	 <script>alert("{{msg}}");</script>
+	 {% endif %}
+  
+
+</head>
+
+<body>
+	<!-- registration -->
+	<div class="modal fade" id="registration" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color: #af9d7e; font-size: 32px;"><b>User Registration</b></h5>
+				</div>
+				<div class="modal-body" id="con">
+					<form class="form-horizontal" method="post" name="myForm" onsubmit="return register(this)" action="{% url 'user' %}"
+						enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="box-content">
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Name</label>
+								<input type="text" name="name" class="form-control" value="" style="width:450px;">
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Address</label>
+								<textarea type="text" class="form-control" name="address" style="width:450px;"></textarea>
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Email</label>
+								<input type="mail" class="form-control" name="email" style="width:450px;">
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Mobile Number</label>
+								<input type="text" name="mobileno" class="form-control" value="" style="width:450px;">
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Username</label>
+								<input type="text" name="username" class="form-control" value="" style="width:450px;">
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Password</label>
+								<input type="password" name="password" class="form-control" value="" style="width:450px;">
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for="">Profile Photo</label>
+								<input type="file" name="profile" class="form-control" value="" style="width:450px;" accept="images/*">
+							</div>
+
+							<div class="modal-footer" id="fot">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-success mb1 bg-blue">Register</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+	</div>
+	</div>
+	<!-- registration -->
+	
+	<!-- login -->
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color: #cf9736; font-size: 32px;"><b>Login</b></h5>
+				</div>
+				<div class="modal-body" id="con">
+					<form class="form-horizontal" method="post" name="Form" onsubmit="return login(this)" action="{% url 'login' %}">
+						{% csrf_token %}
+						<div class="box-content">
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for=""><b>Username</b></label>
+								<input type="text" name="username" class="form-control" value="" style="width:450px;">
+							</div>
+
+							<div class="form-group" style="margin-left:130px;">
+								<label for=""><b>Password</b></label>
+								<input type="password" name="password" class="form-control" value="" style="width:450px;">
+							</div>
+
+							<div class="modal-footer" id="fot">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-sucess" style="background-color: #5ddc50;">Login</button>
+							</div>
+						</div>
+				</div>
+			</div>
+			</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- login -->
+
+	<div class="top_box clearfix">
+		<div class="top_box_inner_1 clearfix">
+			<section id="header">
+				<nav class="navbar navbar-default">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span> </button>
+						<a class="navbar-brand heading_tag" id="for" href="index.html">FOREST MANAGEMENT</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a class="tag_menu active_tab" href="">HOME</a>
+							</li>
+
+							<li>
+								<a class="tag_menu" href="">ABOUT</a>
+							</li>
+
+							<li>
+								<a class="tag_menu" href="">GALLERY</a>
+							</li>
+
+							<li>
+								<a class="tag_menu" href="">CONTACT</a>
+							</li>
+
+							<li>
+								<a class="tag_menu_right"><button data-toggle="modal"
+										data-target="#registration"
+										style="background-color: #44ba6abf;">USER REGISTRATION</button></a>
+							</li>
+
+							<li>
+								<a class="tag_menu_right"><button data-toggle="modal" data-target="#login"
+										style="background-color: #44ba6abf;">LOGIN</button></a>
+							</li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</nav>
+			</section>
+		</div>
+		<div class="top_box_inner_2  clearfix">
+			<section id="top" class="clearfix">
+				<div class="top clearfix">
+					<div class="top_main clearfix">
+						<h4>INTEGER NEC ODIONEC ODIO</h4>
+						<h2>NULLA QUIS SEM NIBH</h2>
+						<ul>
+							<li class="reading_1"><a href="#">VIEW MORE</a></li>
+							<li class="reading_2"><a href="#">GET TORTUOUS</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="factor_main clearfix">
+		<section id="center_1" class="clearfix">
+			<div class="center_1 clearfix">
+				<div class="col-sm-6 center_1_left clearfix">
+					<div class="center_1_left_inner">
+						<h2><span class="runner">Sem</span>ning duis</h2>
+						<p>Sed cursus ante dapibus diam elementum<br /> Sed nisi. Nulla quis sem at nibh elementum<br />
+							Praesent mauris. Fusce tellus sed augue<br />semper porta. Mauris massa. Vestibulum
+							lacinia.<br />Class aptent taciti sociosqu litora torquent: <br />soil, atmosphere,
+							radiation from the sun,<br /> Curabitursodales ligula in.</p>
+						<h5><a href="#">CHECK MORE</a></h5>
+					</div>
+				</div>
+				<div class="col-sm-6 center_1_right clearfix">
+					<div class="center_1_right_inner">
+						<p><a href="#"><img src="{% static 'index/img/2.jpg' %}" width="100%" /></a></p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="center_2" class="clearfix">
+			<div class="center_2 clearfix">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-3 center_2_middle clearfix">
+					<div class="center_2_middle_inner">
+						<p><a href="#"><img src="{% static 'index/img/3.png' %}" /></a></p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<section id="work" class="clearfix">
+		<div class="work_top clearfix">
+			<h1>Sem <span class="wooding">it p</span>orta</h1>
+		</div>
+		<div class="work_middle clearfix">
+			<div class="col-sm-2 work_left clearfix">
+				<div class="work_left_inner">
+					<p><a href="#"><i class="fa fa-cloud"></i></a></p>
+					<h1>TORQUENT</h1>
+				</div>
+			</div>
+			<div class="col-sm-2 work_left clearfix">
+				<div class="work_left_inner">
+					<p><a href="#"><i class="fa fa-wrench"></i></a></p>
+					<h1>DAPIBUS</h1>
+				</div>
+			</div>
+			<div class="col-sm-2 work_left clearfix">
+				<div class="work_left_inner">
+					<p><a href="#"><i class="fa fa-search"></i></a></p>
+					<h1>VESTIBULUM</h1>
+				</div>
+			</div>
+			<div class="col-sm-2 work_left clearfix">
+				<div class="work_left_inner">
+					<p><a href="#"><i class="fa fa-balance-scale"></i></a></p>
+					<h1>IMPERDIET</h1>
+				</div>
+			</div>
+			<div class="col-sm-2 work_left clearfix">
+				<div class="work_left_inner">
+					<p><a href="#"><i class="fa fa-internet-explorer"></i></a></p>
+					<h1>ELEMENTUM</h1>
+				</div>
+			</div>
+			<div class="col-sm-2 work_left clearfix">
+				<div class="work_left_inner">
+					<p><a href="#"><i class="fa fa-fire"></i></a></p>
+					<h1>CONUBIA</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="beauty" class="clearfix">
+		<div class="beauty clearfix">
+			<div class="col-sm-8 beauty_left clearfix">
+				<div class="beauty_left_inner">
+					<div class="col-sm-7 beauty_left_inner_1 clearfix">
+						<div class="beauty_left_inner_1_main">
+							<p><img src="{% static 'index/img/4.jpg' %}" width="100%" height="500px" /></p>
+						</div>
+					</div>
+				</div>
+				<div class="beauty_left_inner_2">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9 beauty_left_inner_2_main">
+						<div class="beauty_left_inner_2_main_1">
+							<p><img src="{% static 'index/img/5.jpg' %}" /></p>
+						</div>
+					</div>
+				</div>
+				<div class="beauty_left_inner_3 clearfix">
+					<div class="col-sm-3 beauty_left_inner_3_main clearfix">
+						<div class="beauty_left_inner_3_main_1">
+							<p><img src="{% static 'index/img/6.png' %}" /></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 beauty_left clearfix">
+				<div class="beauty_left_inner">
+					<h1><span class="shopper">Mau</span>ris semper</h1>
+					<p>Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis
+						ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+						lacinia arcu eget nulla.Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+						inceptos C. Curabitursodales ligula in libero. Sed dignissim lacinia nunc..</p>
+					<h3>"Vestibulum lacinia arcu eget nulla class aptent taciti sociosqu"</h3>
+					<h5><a href="#">PLAY OUR TEAM</a></h5>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="project" class="clearfix">
+		<div class="project clearfix">
+			<div class="project_top clearfix">
+				<h1>Lacini<span class="respons">a in</span>ceptos</h1>
+			</div>
+			<div class="project_middle clearfix">
+				<div class="col-sm-3 project_middle_left clearfix">
+					<div class="project_middle_left_inner_1">
+						<div class="grid clearfix">
+							<figure class="effect-romeo">
+								<img src="{% static 'index/img/7.jpg' %}" alt="img17" />
+								<figcaption>
+									<h2>Duis <span>Fusce</span></h2>
+									<p>aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+									<a href="#">View more</a>
+								</figcaption>
+							</figure>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 project_middle_left clearfix">
+					<div class="project_middle_left_inner_1">
+						<div class="grid clearfix">
+							<figure class="effect-romeo">
+								<img src="{% static 'index/img/8.jpg' %}" alt="img17" />
+								<figcaption>
+									<h2>Duis <span>Fusce</span></h2>
+									<p>aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+									<a href="#">View more</a>
+								</figcaption>
+							</figure>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 project_middle_left clearfix">
+					<div class="project_middle_left_inner_1">
+						<div class="grid clearfix">
+							<figure class="effect-romeo">
+								<img src="{% static 'index/img/9.jpg' %}" alt="img17" />
+								<figcaption>
+									<h2>Duis <span>Fusce</span></h2>
+									<p>Aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+									<a href="#">View more</a>
+								</figcaption>
+							</figure>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 project_middle_left clearfix">
+					<div class="project_middle_left_inner_1">
+						<div class="grid clearfix">
+							<figure class="effect-romeo">
+								<img src="{% static 'index/img/10.jpg' %}" alt="img17" />
+								<figcaption>
+									<h2>Duis <span>Fusce</span></h2>
+									<p>Aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+									<a href="#">View more</a>
+								</figcaption>
+							</figure>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="project_bottom clearfix">
+				<h5><a href="#">NOSTRA A IMPERDIET</a></h5>
+			</div>
+		</div>
+	</section>
+
+	<section id="team" class="clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="team clearfix">
+					<div class="col-sm-4 team_left clearfix">
+						<div class="team_left_inner">
+							<h5>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+								lacinia arcu eget vestibulum!</h5>
+							<h3><img src="{% static 'index/img/11.jpg' %}" class="img-circle" /></h3>
+							<h4>Nec Lacinia</h4>
+						</div>
+					</div>
+					<div class="col-sm-4 team_left clearfix">
+						<div class="team_left_inner">
+							<h5>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+								lacinia arcu eget vestibulum!</h5>
+							<h3><img src="{% static 'index/img/12.jpg' %}" class="img-circle" /></h3>
+							<h4>Fusce Conubia</h4>
+						</div>
+					</div>
+					<div class="col-sm-4 team_left clearfix">
+						<div class="team_left_inner">
+							<h5>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+								lacinia arcu eget vestibulum!</h5>
+							<h3><img src="{% static 'index/img/13.jpg' %}" class="img-circle" /></h3>
+							<h4>Sagittis Ipsum</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="gallery" class="clearfix">
+		<div class="gallery clearfix">
+			<div class="col-sm-4 gallery_left  clearfix">
+				<div class="gallery_left_inner clearfix">
+					<h1><span class="respons">Our</span> gallery</h1>
+					<p>Nulla quis sem at nibh elementum imperdiet.<br /> Duis sagittis ipsum. Praesent mauris. Fusce
+						<br />nec tellus sed augue semper porta. Mauris<br /> massa. Vestibulum lacinia arcu eget
+						nulla.<br />Class aptent taciti sociosqu ad litora.
+					</p>
+					<h5><a href="#">VIEW GALLERY</a></h5>
+				</div>
+			</div>
+			<div class="col-sm-8 gallery_right clearfix">
+				<div class="gallery_right_inner">
+					<div class="col-sm-12 box">
+						<div class="col-sm-6 box_left">
+							<div class="av-container av-visible">
+								<article class="aniview animated slideInDown" data-av-animation="slideInDown"
+									style="opacity: 1;">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<a href="{% static 'index/img/500/1.jpg' %}" title="Nature Portfolio"
+												class="zoom" data-title="Trending Fashion"
+												data-footer="In the fashion world" data-type="image"
+												data-toggle="lightbox">
+												<img src="{% static 'index/img/14.jpg' %}" width="%"
+													alt="Nature Portfolio">
+											</a>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class="col-sm-6 box_left">
+							<div class="av-container av-visible">
+								<article class="aniview animated slideInDown" data-av-animation="slideInDown"
+									style="opacity: 1;">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<a href="{% static 'index/img/500/2.jpg' %}" title="Nature Portfolio"
+												class="zoom" data-title="Trending Fashion"
+												data-footer="In the fashion world" data-type="image"
+												data-toggle="lightbox">
+												<img src="{% static 'index/img/15.jpg' %}" width="%"
+													alt="Nature Portfolio">
+											</a>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 box">
+						<div class="col-sm-6 box_left">
+							<div class="av-container av-visible">
+								<article class="aniview animated slideInDown" data-av-animation="slideInDown"
+									style="opacity: 1;">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<a href="{% static 'index/img/500/3.jpg' %}" title="Nature Portfolio"
+												class="zoom" data-title="Trending Fashion"
+												data-footer="In the fashion world" data-type="image"
+												data-toggle="lightbox">
+												<img src="{% static 'index/img/16.jpg' %}" width="%"
+													alt="Nature Portfolio">
+											</a>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class="col-sm-6 box_left">
+							<div class="av-container av-visible">
+								<article class="aniview animated slideInDown" data-av-animation="slideInDown"
+									style="opacity: 1;">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<a href="{% static 'index/img/500/4.jpg' %}" title="Nature Portfolio"
+												class="zoom" data-title="Trending Fashion"
+												data-footer="In the fashion world" data-type="image"
+												data-toggle="lightbox">
+												<img src="{% static 'index/img/17.jpg' %}" width="%"
+													alt="Nature Portfolio">
+											</a>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="latest" class="clearfix">
+		<div class="latest clearfix">
+			<h1>Tellu<span class="respons">s sa</span>gittis</h1>
+		</div>
+		<div class="latest_middle clearfix">
+			<div class="col-sm-3 latest_left clearfix">
+				<div class="project_middle_left_inner_1">
+					<div class="grid clearfix">
+						<figure class="effect-romeo">
+							<img src="{% static 'index/img/18.jpg' %}" alt="img17">
+							<figcaption>
+								<h2>Duis <span>Fusce</span></h2>
+								<p>Aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+								<a href="#">View more</a>
+							</figcaption>
+						</figure>
+
+					</div>
+				</div>
+				<div class="latest_middle_inner clearfix">
+					<h5><a href="#">LITORA TORQUENTT PER CONUBIA NOSTRA, PER APTENT</a></h5>
+				</div>
+			</div>
+			<div class="col-sm-3 latest_left clearfix">
+				<div class="project_middle_left_inner_1">
+					<div class="grid clearfix">
+						<figure class="effect-romeo">
+							<img src="{% static 'index/img/19.jpg' %}" alt="img17">
+							<figcaption>
+								<h2>Duis <span>Fusce</span></h2>
+								<p>Aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+								<a href="#">View more</a>
+							</figcaption>
+						</figure>
+
+					</div>
+				</div>
+				<div class="latest_middle_inner clearfix">
+					<h5><a href="#">LITORA TORQUENTT PER CONUBIA NOSTRA, PER APTENT</a></h5>
+				</div>
+			</div>
+			<div class="col-sm-3 latest_left clearfix">
+				<div class="project_middle_left_inner_1">
+					<div class="grid clearfix">
+						<figure class="effect-romeo">
+							<img src="{% static 'index/img/20.jpg' %}" alt="img17">
+							<figcaption>
+								<h2>Duis <span>Fusce</span></h2>
+								<p>Aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+								<a href="#">View more</a>
+							</figcaption>
+						</figure>
+
+					</div>
+				</div>
+				<div class="latest_middle_inner clearfix">
+					<h5><a href="#">LITORA TORQUENTT PER CONUBIA NOSTRA, PER APTENT</a></h5>
+				</div>
+			</div>
+			<div class="col-sm-3 latest_left clearfix">
+				<div class="project_middle_left_inner_1">
+					<div class="grid clearfix">
+						<figure class="effect-romeo">
+							<img src="{% static 'index/img/21.jpg' %}" alt="img17">
+							<figcaption>
+								<h2>Duis <span>Fusce</span></h2>
+								<p>Aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos C.</p>
+								<a href="#">View more</a>
+							</figcaption>
+						</figure>
+
+					</div>
+				</div>
+				<div class="latest_middle_inner clearfix">
+					<h5><a href="#">LITORA TORQUENTT PER CONUBIA NOSTRA, PER APTENT</a></h5>
+				</div>
+			</div>
+		</div>
+		<div class="latest_bottom clearfix">
+			<p><a href="#">PLAY MORE</a></p>
+		</div>
+	</section>
+
+	<section id="forest" class="clearfix">
+		<div class="forest_top clearfix">
+			<div class="container">
+				<div class="row">
+					<div class="forest clearfix">
+						<div class="col-sm-8 forest_left clearfix">
+							<div class="forest_left_inner">
+								<h2>Lorem ipsum dolor sit amet!</h2>
+							</div>
+						</div>
+						<div class="col-sm-4 forest_right clearfix">
+							<div class="forest_right_inner">
+								<p><a href="#">NUNC A INCEPTOS</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="footer" class="clearfix">
+		<div class="footer clearfix">
+			<div class="col-sm-2 footer_left left_1 clearfix">
+				<div class="footer_left_inner">
+					<h4><span class="quicker">NULLA M</span>SAAS</h4>
+					<p><a href="about.html">About</a></p>
+					<p><a href="compaigns.html">CAUSE</a></p>
+					<p><a href="news.html">News</a></p>
+					<p><a href="gallery.html">Gallery</a></p>
+					<p><a href="contact.html">Contact</a></p>
+				</div>
+			</div>
+			<div class="col-sm-3 footer_left clearfix">
+				<div class="footer_left_inner footer_left_inner_new">
+					<h4><span class="quicker">SEMPER</span> ARCU</h4>
+					<h5><a href="#">Consectetur adipiscing elit. Integer odionec</a></h5>
+					<h5><a href="#">Ad litora torquent per conubia nostra, per </a></h5>
+					<h5><a href="#">Quis sem at nibh elementum imperdiet sagittis</a></h5>
+				</div>
+			</div>
+			<div class="col-sm-7 footer_right clearfix">
+				<div class="footer_right_inner_1">
+					<h4><span class="respons">IMPERD</span>IET</h4>
+				</div>
+				<div class="footer_right_inner_2">
+					<div class="col-sm-3 footer_right_inner_2_main">
+						<div class="footer_right_inner_2_main_bottom">
+							<div class="grid clearfix">
+
+								<figure class="effect-apollo">
+									<img src="{% static 'index/img/23.jpg' %}" alt="img22" />
+									<figcaption>
+										<a href="#">View more</a>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 footer_right_inner_2_main">
+						<div class="footer_right_inner_2_main_bottom">
+							<div class="grid clearfix">
+
+								<figure class="effect-apollo">
+									<img src="{% static 'index/img/24.jpg' %}" alt="img22" />
+									<figcaption>
+										<a href="#">View more</a>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 footer_right_inner_2_main">
+						<div class="footer_right_inner_2_main_bottom">
+							<div class="grid clearfix">
+
+								<figure class="effect-apollo">
+									<img src="{% static 'index/img/25.jpg' %}" alt="img22" />
+									<figcaption>
+										<a href="#">View more</a>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 footer_right_inner_2_main">
+						<div class="footer_right_inner_2_main_bottom">
+							<div class="grid clearfix">
+
+								<figure class="effect-apollo">
+									<img src="{% static 'index/img/26.jpg' %}" alt="img22" />
+									<figcaption>
+										<a href="#">View more</a>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="footer_last" class="clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="footer_last clearfix">
+					<div class="col-sm-6 footer_last_left clearfix">
+						<div class="footer_last_left_inner clearfix">
+							<p class="website">� 2013 Your Website Name. All rights reserved | Design by<a
+									href="http://www.templateonweb.com"> TemplateOnWeb</a></p>
+						</div>
+					</div>
+					<div class="col-sm-6 footer_last_right clearfix">
+						<div class="footer_last_right_inner clearfix">
+							<ul>
+								<li><a href="#">Conubia &amp; Egit</a></li>
+								<li><a href="#">Nostra</a></li>
+								<li><a href="#">Aptent</a></li>
+								<li><a href="#">Massa</a></li>
+								<li><a href="#">Litora &amp; Dignissim</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('i.glyphicon-thumbs-up, i.glyphicon-thumbs-down').click(function () {
+				var $this = $(this),
+					c = $this.data('count');
+				if (!c) c = 0;
+				c++;
+				$this.data('count', c);
+				$('#' + this.id + '-bs3').html(c);
+			});
+			$(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+				event.preventDefault();
+				$(this).ekkoLightbox();
+			});
+		});
+
+	</script>
+	<script src="{% static 'js/login.js' %}"></script>
+	<script src="{% static 'js/register.js' %}"></script>
+</body>
+
+</html>

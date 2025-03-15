@@ -1,0 +1,71 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #head{
+        margin-left: 350px;
+    margin-top: 30px;
+    }
+    h2{
+        margin-left: 14px;
+    }
+    .logo{
+        font-size: 18px;
+    margin-left: 16px;
+    }
+    #in{
+        height: 43px;
+    }
+    .but{
+        width: 90px;
+    height: 30px;
+    }
+</style>
+
+<table>
+<div class="col-lg-5" id="head"> 
+    <div class="section-title">
+      <h2>Add Forest Details</h2>
+      <p></p>
+    </div>
+
+    <form action="{% url 'forest' %}" onsubmit="return forest(this)" method="post" role="form">
+        {% csrf_token %}
+      <div class="form-row">
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" name="name" class="form-control" id="in" placeholder="Name" >
+          <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" name="area" class="form-control" id="in" placeholder="Area">
+          <div class="validate"></div>
+        </div>
+     
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" name="district" class="form-control" id="in" placeholder="District">
+          <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+          <input type="text" class="form-control" name="location" id="in" placeholder="Location">
+          <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+            <input type="text" class="form-control" name="attraction" id="in" placeholder="Attraction">
+            <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+            <input type="text" class="form-control" name="website" id="in" placeholder="Website">
+            <div class="validate"></div>
+        </div>
+        
+      </div>
+
+
+      <div class="text-center"><input type="submit" value="Save" class="but"  style="background:#8cbde7;" /></div>
+    </form>
+  </div>
+  <div class="col-lg-2">
+</div></table>
+
+
+{% endblock %}
