@@ -1,12 +1,12 @@
 function login(x){
-    var name = /^[A-Za-z ]+$/;
+    var username = /^[A-Za-z0-9_.@-]+$/;
 
     if (x.username.value == "") {
         alert('Please enter your username');
         x.username.focus();
         return false;
     }
-    else if (!x.username.value.match(name)) {
+    else if (!x.username.value.match(username)) {
         alert('Your username contain invalid characters');
         x.username.focus();
         return false;
@@ -16,4 +16,6 @@ function login(x){
         x.password.focus();
         return false;
     }
+
+    return true;
 }

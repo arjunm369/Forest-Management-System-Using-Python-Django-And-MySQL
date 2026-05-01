@@ -23,7 +23,7 @@ function register(x){
         alert('Please enter your email address');
         x.email.focus();
         return false;
-    } else if (!x.email.value.match(emailPattern)) { 
+    } else if (!x.email.value.match(email)) { 
         alert('Invalid email address');
         x.email.focus();
         return false;
@@ -69,4 +69,6 @@ function register(x){
         x.profile.focus();
         return false;
     }
+
+    return true;
 }

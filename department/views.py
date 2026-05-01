@@ -19,72 +19,72 @@ def adminhead(request):
     return render(request,"adminhead.html",{"msg":msg})
 
 def login(request):
-     if request.POST:
-        username = request.POST["username"]
-        password = request.POST["password"]
-        try:
-            datac = log.objects.filter(username=username, password=password).count()
-            if datac==1:
-                data=log.objects.get(username=username, password=password)
-                if data.role=="admin":
-                    request.session['username'] = data.username
-                    request.session['role'] = data.role
-                    request.session['id'] = data.logid
-                    response = redirect('/adminhome?msg=welcome admin')
-                    return response
-                elif data.role=="user":
-                    request.session['username'] = data.username
-                    request.session['role'] = data.role
-                    request.session['id'] = data.logid
-                    response = redirect('/userhome?msg=Welcome user')
-                    return response
-                elif data.role=="department":
-                    request.session['username'] = data.username
-                    request.session['role'] = data.role
-                    request.session['id'] = data.logid
-                    response = redirect('/departmenthome?msg=Welcome Forest department')
-                    return response
-                else :
-                    response = redirect('/index?msg=invalid access')
-                    return response
+    if request.method != "POST":
+        return redirect('/index/?msg=please login again')
 
+    username = request.POST.get("username", "").strip()
+    password = request.POST.get("password", "")
 
-            else:
-                response = redirect('/index?msg=invalid username or password')
-                return response
-               
-        except:
-            response = redirect('/index?msg=something went wrong')
-            return response
-     else:
-        response = redirect('/index?msg=exception occured')
-        return response
+    if not username or not password:
+        return redirect('/index/?msg=enter username and password')
+
+    try:
+        data = log.objects.filter(username=username, password=password).first()
+        if data is None:
+            return redirect('/index/?msg=invalid username or password')
+
+        request.session['username'] = data.username
+        request.session['role'] = data.role
+        request.session['id'] = data.logid
+
+        if data.role == "admin":
+            return redirect('/adminhome/?msg=welcome admin')
+        if data.role == "user":
+            return redirect('/userhome/?msg=Welcome user')
+        if data.role == "department":
+            return redirect('/departmenthome/?msg=Welcome Forest department')
+
+        return redirect('/index/?msg=invalid access')
+    except Exception:
+        return redirect('/index/?msg=something went wrong')
 
 def logout(request):
     try:
         del request.session['id']
         del request.session['role']
         del request.session['username']
-        response = redirect("/index?id=logout")
-        return response
+        return redirect("/index/?msg=logout")
     except:
-        response = redirect("/index?id=logout")
-        return response
+        return redirect("/index/?msg=logout")
 
 def user(request):
-    name=request.POST["name"]
-    address=request.POST["address"]
-    email=request.POST["email"]
-    mobileno=request.POST["mobileno"]
-    username=request.POST["username"]
-    password=request.POST["password"]
-    profile=request.FILES["profile"]
+    if request.method != "POST":
+        return redirect("/index/?msg=please submit the registration form again")
 
-    log.objects.create(username=username,password=password,role="user")
-    datal=log.objects.last()
-    us.objects.create(login=datal,name=name,address=address,email=email,mobileno=mobileno,profile=profile)
-    response=redirect("/index?msg=Registration successfull")
-    return response
+    name = request.POST.get("name", "").strip()
+    address = request.POST.get("address", "").strip()
+    email = request.POST.get("email", "").strip()
+    mobileno = request.POST.get("mobileno", "").strip()
+    username = request.POST.get("username", "").strip()
+    password = request.POST.get("password", "")
+    profile = request.FILES.get("profile")
+
+    if not all([name, address, email, mobileno, username, password, profile]):
+        return redirect("/index/?msg=please fill all registration fields")
+
+    if log.objects.filter(username=username).exists():
+        return redirect("/index/?msg=username already exists")
+
+    created_login = log.objects.create(username=username, password=password, role="user")
+    us.objects.create(
+        login=created_login,
+        name=name,
+        address=address,
+        email=email,
+        mobileno=mobileno,
+        profile=profile,
+    )
+    return redirect("/index/?msg=registration successful")
 
 def adprivacy(request):
     msg=request.GET.get("msg","")
